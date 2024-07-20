@@ -18,7 +18,7 @@ st.page_link("pages/guide.py", label="Learn how the recommendation engine works"
 
 with st.sidebar:
     st.link_button("See Github repository💡", 
-                   url="https://github.com/phyosandarwin/movie-recommender-chatbot", type='primary', use_container_width=True)
+                   url="https://github.com/phyosandarwin/movie-recommendation-engine", type='primary', use_container_width=True)
     st.write("Made by Phyo Sandar Win 💙")
 
 tab1, tab2, tab3, tab4 = st.tabs(["Movie Title Search", "Recommend by Genre", 
