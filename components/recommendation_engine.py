@@ -1,10 +1,11 @@
-# import libraries
+import streamlit as st
 import pandas as pd
 import re
 import gzip
 from sklearn.metrics.pairwise import cosine_similarity
 from fuzzywuzzy import fuzz
 from .data_handler import load_movie_data
+
 
 
 # preprocessing title
@@ -14,6 +15,7 @@ def clean_title(title):
     return title
 
 #---------Operation 1: Search movie title and return exact/similar search ----------
+@st.cache_data
 def search_movie_title(df, movie_title, k=15):
     # Clean the input title
     cleaned_title = clean_title(movie_title)
@@ -39,6 +41,7 @@ def search_movie_title(df, movie_title, k=15):
 
 
 #----------Operation 2: Recommendations based on dropdown criteria options-------
+@st.cache_data
 def recommend_movies_by_genres(df, user_genres, k=30):
     # Create a filter mask for all specified genres
     genre_mask = df['genres'].apply(lambda genres: any(genre.lower() in genres.lower() for genre in user_genres))
@@ -55,6 +58,7 @@ def recommend_movies_by_genres(df, user_genres, k=30):
 
     return top_movies[['title', 'overview', 'runtime', 'vote_average', 'release_date', 'poster_path']]
 
+@st.cache_data
 def recommend_movies_by_language(df, language, k=30):
     # Get the movies that belong to the specified genre
     lang_movies = df[df['original_language'].str.contains(language)]
@@ -67,6 +71,7 @@ def recommend_movies_by_language(df, language, k=30):
 
     return top_lang_movies[['title', 'overview', 'runtime', 'vote_average', 'release_date', 'poster_path']]
 
+@st.cache_data
 def search_movie_overview(df, movie_title, k=30):
     similar_movie = search_movie_title(df, movie_title, k=1)
     idx = similar_movie.index[0]  # Get the index of the most similar movie
