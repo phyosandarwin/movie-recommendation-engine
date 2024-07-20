@@ -1,0 +1,4 @@
+fuzzywuzzy
+pandas
+scikit_learn
+streamlit
