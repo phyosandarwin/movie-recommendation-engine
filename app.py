@@ -8,10 +8,9 @@ st.set_page_config(page_title="Cinematic Seeker", page_icon="🍿",
 
 
 # load pickle files
-data_folder = os.path.join(os.getcwd(), 'data', 'pkl_files')
-movie_overall_data = load_movie_data(os.path.join(data_folder, "movie_overall_data.pkl"))
-movie_genre_data = load_movie_data(os.path.join(data_folder, "movie_genres_rec_data.pkl"))
-movie_lang_data = load_movie_data(os.path.join(data_folder, "movie_language_rec_data.pkl"))
+movie_overall_data = load_movie_data("movie_overall_data.pkl.gz")
+movie_genre_data = load_movie_data("movie_genres_rec_data.pkl.gz")
+movie_lang_data = load_movie_data("movie_language_rec_data.pkl.gz")
 
 st.title("Cinematic Seeker 🍿")
 st.markdown(f'''<i>Search for movie title or get movie title recommendations!</i>''', unsafe_allow_html=True)

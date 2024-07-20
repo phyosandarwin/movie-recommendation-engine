@@ -1,6 +1,7 @@
 # import libraries
 import pandas as pd
 import re
+import gzip
 from sklearn.metrics.pairwise import cosine_similarity
 from fuzzywuzzy import fuzz
 from .data_handler import load_movie_data
@@ -18,8 +19,8 @@ def search_movie_title(df, movie_title, k=15):
     cleaned_title = clean_title(movie_title)
     
     # Calculate cosine similarity between cleaned_title and movie titles
-    vectorizer_title = load_movie_data("tfidf_vect_title.pkl")
-    tfidf_matrix_title = load_movie_data("tfidf_matrix_title.pkl")
+    vectorizer_title = load_movie_data("tfidf_vectorizer_title.pkl.gz")
+    tfidf_matrix_title = load_movie_data("tfidf_matrix_title.pkl.gz")
     query_vect_title = vectorizer_title.transform([cleaned_title])
     similarity_title = cosine_similarity(query_vect_title, tfidf_matrix_title).flatten()
     
@@ -70,7 +71,7 @@ def search_movie_overview(df, movie_title, k=30):
     similar_movie = search_movie_title(df, movie_title, k=1)
     idx = similar_movie.index[0]  # Get the index of the most similar movie
 
-    tfidf_matrix_overview = load_movie_data("tfidf_matrix_overview.pkl")
+    tfidf_matrix_overview = load_movie_data("tfidf_matrix_overview.pkl.gz")
 
     query_vect_overview = tfidf_matrix_overview[idx]
     similarity_overview = cosine_similarity(query_vect_overview.reshape(1, -1), tfidf_matrix_overview).flatten()
