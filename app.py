@@ -14,7 +14,7 @@ movie_lang_data = load_movie_data("movie_language_rec_data.pkl.gz")
 
 st.title("Cinematic Seeker 🍿")
 st.markdown(f'''<i>Search for movie title or get movie title recommendations!</i>''', unsafe_allow_html=True)
-st.page_link("pages/Guide.py", label="Learn how the recommendation engine works", icon="👉", )
+st.page_link("pages/guide.py", label="Learn how the recommendation engine works", icon="👉", )
 
 with st.sidebar:
     st.link_button("See Github repository💡", 
